@@ -7,7 +7,7 @@ A Simple Python Project which roughly detects the digit entered by the User.
 
 * PIL
 
-*Numpy
+* Numpy
 
 * Matplotlib
 
