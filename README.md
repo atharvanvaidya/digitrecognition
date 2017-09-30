@@ -2,7 +2,7 @@
 A Simple Python Project which roughly detects the digit entered by the User.
 
 
-Python3 Modules Required:
+##Python3 Modules Required:
 
 1.Tkinter
 
@@ -15,7 +15,7 @@ Python3 Modules Required:
 5.pyscreenshot(for ImageGrab)
 
 
-Steps to run the Program:
+##Steps to run the Program:
 
 ```sh
 python paint.py
