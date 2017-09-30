@@ -17,5 +17,5 @@ A Simple Python Project which roughly detects the digit entered by the User.
 ## Steps to run the Program:
 
 ```sh
-python paint.py
+python3 paint.py
 ```
