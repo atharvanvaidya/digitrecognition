@@ -12,7 +12,7 @@ import digitrecognition
 # Height and Width of the Canvas
 WIDTH = 256
 HEIGHT = 256
-TESTIMAGEPATH = '/home/atharva/PycharmProjects/digitrecognition/images/test.png'
+TESTIMAGEPATH = '/path/to/this/file/test.png'
 
 class Paint(object):
     DEFAULT_PEN_SIZE = 5.0
