@@ -1,9 +1,10 @@
+# This Script Thresholds the Resized Image into Either Pure Black OR Pure White
 from PIL import Image
 import numpy as np
 
-
 def threshold(imageArray):
 
+    # Create balanceAr to Store the Mean of All the Pixel Values
     balanceAr = []
     newAr = imageArray
     from statistics import mean
@@ -12,6 +13,7 @@ def threshold(imageArray):
             avgNum = mean(eachPix[:3])
             balanceAr.append(avgNum)
 
+    # OverWrite Each Pixel Value as Either Black OR White after comparing to the mean.
     balance = mean(balanceAr)
     for eachRow in newAr:
         for eachPix in eachRow:

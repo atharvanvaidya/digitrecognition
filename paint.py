@@ -9,31 +9,27 @@ import thresholding
 import digitrecognition
 # from tkColorChooser import askcolor
 
+# Height and Width of the Canvas
 WIDTH = 256
 HEIGHT = 256
-
+TESTIMAGEPATH = '/home/atharva/PycharmProjects/digitrecognition/images/test.png'
 
 class Paint(object):
     DEFAULT_PEN_SIZE = 5.0
     DEFAULT_COLOR = 'black'
 
+    # Constructor
     def __init__(self):
         self.root = Tk()
 
-        self.pen_button = Button(self.root, text='Pen', command=self.use_pen)
+        self.pen_button = Button(self.root, text=' Pen ', command=self.use_pen)
         self.pen_button.grid(row=0, column=0)
 
-        self.brush_button = Button(self.root, text='Save', command=self.use_brush)
+        self.brush_button = Button(self.root, text='Save ', command=self.save_image)
         self.brush_button.grid(row=0, column=1)
-
-        # self.color_button = Button(self.root, text='color', command=self.choose_color)
-        # self.color_button.grid(row=0, column=2)
 
         self.eraser_button = Button(self.root, text='Erase', command=self.use_eraser)
         self.eraser_button.grid(row=0, column=2)
-
-        self.choose_size_button = Scale(self.root, from_=1, to=20, orient=HORIZONTAL)
-        self.choose_size_button.grid(row=0, column=3)
 
         self.c = Canvas(self.root, bg='white', width=WIDTH, height=HEIGHT)
         self.c.grid(row=1, columnspan=4)
@@ -44,21 +40,18 @@ class Paint(object):
     def setup(self):
         self.old_x = None
         self.old_y = None
-        self.line_width = self.choose_size_button.get()
+        self.line_width = 18
         self.color = self.DEFAULT_COLOR
         self.eraser_on = False
         self.active_button = self.pen_button
         self.c.bind('<B1-Motion>', self.paint)
-        self.c.bind('<ButtonRelease-1>', self.reset)
 
+    # To Choose Pen
     def use_pen(self):
         self.activate_button(self.pen_button)
 
-    def use_brush(self):
-        # self.activate_button(self.brush_button)
-        # image1 = Image.new("RGB", (256, 256), (255,255,255))
-        # draw = ImageDraw.Draw(image1)
-        # image1.save("hello.png")
+    # To Save the Entered Input as Image
+    def save_image(self):
         x = self.c.winfo_rootx()
         y = self.c.winfo_rooty()
         x1 = x + WIDTH
@@ -68,17 +61,11 @@ class Paint(object):
         self.grabcanvas.save("original.png")
         print("Image Saved!")
 
-    # def choose_color(self):
-    #    self.eraser_on = False
-    #   self.color = askcolor(color=self.color)[1]
-
+    # To Use Eraser
     def use_eraser(self):
         self.activate_button(self.eraser_button, eraser_mode=True)
 
-    # TODO: reset canvas
-    # TODO: undo and redo
-    # TODO: draw triangle, rectangle, oval, text
-
+    # To Activate the Button When Clicked
     def activate_button(self, some_button, eraser_mode=False):
         self.active_button.config(relief=RAISED)
         some_button.config(relief=SUNKEN)
@@ -86,21 +73,18 @@ class Paint(object):
         self.eraser_on = eraser_mode
 
     def paint(self, event):
-        self.line_width = self.choose_size_button.get()
         paint_color = 'white' if self.eraser_on else self.color
         if self.old_x and self.old_y:
             self.c.create_line(self.old_x, self.old_y, event.x, event.y,
-                               width=self.line_width, fill=paint_color,
+                               width=18, fill=paint_color,
                                capstyle=ROUND, smooth=TRUE, splinesteps=36)
         self.old_x = event.x
         self.old_y = event.y
 
-    def reset(self, event):
-        self.old_x, self.old_y = None, None
 
-
+# Main Function
 if __name__ == '__main__':
     ge = Paint()
     resize.res()
     thresholding.thres()
-    digitrecognition.whatNumIsThis('/home/atharva/PycharmProjects/digitrecognition/images/test.png')
+    digitrecognition.whatNumIsThis(TESTIMAGEPATH)
